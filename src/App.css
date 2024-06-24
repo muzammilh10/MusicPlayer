@@ -1,0 +1,80 @@
+html, body, #root {
+  background: #281010;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  height: 100%;
+}
+
+html .container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+  background: linear-gradient(to bottom, rgb(66, 7, 7), rgb(0, 0, 0));
+  color: white;
+}
+
+.column {
+  padding: 22px;
+  box-sizing: border-box;
+  flex: 1; /* Allow the columns to grow and shrink */
+}
+
+.column-1 {
+  width: 22%;
+  background-color: #0a0707;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out the content within the column */
+}
+
+.column-3 {
+  width: 22%;
+background: linear-gradient(to bottom, rgb(45 2 2), rgb(0, 0, 0));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out the content within the column */
+}
+
+.column-60 {
+  display: flex;
+  flex-direction: column;
+  width: 56%;
+  min-height: 100%; /* Ensure this column takes at least the full viewport height */
+}
+
+.imageStyle {
+  max-width: 90%;
+  height: auto;
+  width: 18%;
+  margin: auto;
+  text-align: center;
+  position: fixed;
+}
+
+.imageStyle2 {
+  max-width: 90%;
+  height: auto;
+  margin: auto;
+  text-align: center;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.headerStyle {
+  max-width: 100% !important;
+}
+
+.bottom_left_content {
+  position: fixed;
+  left: 33px;
+  bottom: 20px;
+}
+
+.menuStyle {
+  position: fixed;
+  margin-top: 9%;
+  margin-left: 1%;
+}
