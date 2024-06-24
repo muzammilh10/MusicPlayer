@@ -104,7 +104,6 @@ body {
 .volume-slider .volumerange,
 .progress-bar .progress {
     width: 100%;
-    -webkit-appearance: none;
     height: inherit;
     background: transparent;
     outline: none;
