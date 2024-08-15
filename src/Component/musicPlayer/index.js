@@ -5,6 +5,7 @@ import Slider from '@mui/material/Slider';
 
 function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) {
     const [isPlaying, setIsPlaying] = useState(false);
+    cost [current]
     const [audio, setAudio] = useState(null);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
@@ -39,7 +40,7 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
 
     useEffect(() => {
         if (audio && isPlaying) {
-            audio.play();
+            const audioId = audio.play();
             updateCurrentTime();
         } else {
             cancelAnimationFrame(updateCurrentTimeId.current);
@@ -51,7 +52,8 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
             if (isPlaying) {
                 audio.pause();
             } else {
-                audio.play();
+                 audio.play();
+                console.log({audioId})
             }
             setIsPlaying(!isPlaying);
         }

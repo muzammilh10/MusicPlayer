@@ -65,27 +65,35 @@ function App() {
         <div className="column-1">
           <img src='./logo.png'
             className='imageStyle' />
-          <img src='./Menu.png'
-            className='menuStyle'
-          />
 
-          <img src='./General.png'
-            className='bottom_left_content' />
+
+          <ul className='menuStyle'>
+            <li><img src='./vector.png' /> <span>Home</span></li>
+            <li><img src='./vector (2).png' /> <span> Trends</span ></li>
+            <li><img src='./vector (1).png' /> <span> Trends</span ></li>
+            <li><img src='./vector (3).png' /> <span> Discover</span > </li>
+
+          </ul>
+
+          <ul className='bottom_left_content' >
+            <li><img src='./Settings.png' /> Setting</li>
+            <li><img src='./Log Out.png' /> Log Out </li>     
+           </ul>
         </div>
-       
-         <div className=" column-60">
+
+        <div className=" column-60">
           <Header className='headerStyle' />
           <img src='./Pic.png'
             className='imageStyle2' />
 
- {/*
+          
            <DND
             dataItems={dataItems}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}            
           />
- */}
-        </div> 
+
+        </div>
         <div className="column column-3">
           <MusicPlayer
             dataItems={dataItems}
