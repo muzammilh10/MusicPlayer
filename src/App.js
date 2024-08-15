@@ -62,7 +62,7 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <div className="column column-1">
+        <div className="column-1">
           <img src='./logo.png'
             className='imageStyle' />
           <img src='./Menu.png'
@@ -72,19 +72,20 @@ function App() {
           <img src='./General.png'
             className='bottom_left_content' />
         </div>
-        <div className="column column-60">
+       
+         <div className=" column-60">
           <Header className='headerStyle' />
           <img src='./Pic.png'
             className='imageStyle2' />
 
-
-          <DND
+ {/*
+           <DND
             dataItems={dataItems}
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}            
           />
-
-        </div>
+ */}
+        </div> 
         <div className="column column-3">
           <MusicPlayer
             dataItems={dataItems}

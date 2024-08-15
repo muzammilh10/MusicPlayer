@@ -8,10 +8,9 @@ html, body, #root {
   height: 100%;
 }
 
-html .container {
+ .container {
   display: flex;
-  width: 100%;
-  min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+  width: 100%;  min-height: 100vh; /* Ensure the container takes at least the full viewport height */
   background: linear-gradient(to bottom, rgb(66, 7, 7), rgb(0, 0, 0));
   color: white;
 }
@@ -31,6 +30,7 @@ html .container {
 }
 
 .column-3 {
+  position: relative;
   width: 22%;
 background: linear-gradient(to bottom, rgb(45 2 2), rgb(0, 0, 0));
   display: flex;
@@ -55,16 +55,17 @@ background: linear-gradient(to bottom, rgb(45 2 2), rgb(0, 0, 0));
 }
 
 .imageStyle2 {
+  max-width: 100%;
+    height: auto;
+    width: auto\9;
   max-width: 90%;
   height: auto;
-  margin: auto;
-  text-align: center;
   margin-left: 5%;
   margin-top: 5%;
 }
 
 .headerStyle {
-  max-width: 100% !important;
+  max-width: 100% ;
 }
 
 .bottom_left_content {
