@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './App.css';
-import DND from './DreagAndDrop';
-import Header from './Header/Header';
-import MusicPlayer from './musicPlayer';
+import DND from './Component/DreagAndDrop/index';
+import Header from './Component/Header/Header';
+import MusicPlayer from './Component/musicPlayer/index';
 
 const dataItems = [
   {
@@ -81,8 +81,7 @@ function App() {
           <DND
             dataItems={dataItems}
             currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            
+            setCurrentIndex={setCurrentIndex}            
           />
 
         </div>
