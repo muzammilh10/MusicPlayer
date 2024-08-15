@@ -17,7 +17,8 @@ body {
     /* top: 36%; */
     /* width: 100%; */
     height: auto;
-   
+    margin: 12px;
+
 }
 
 .music-body {
@@ -25,9 +26,7 @@ body {
     padding: 10px;
     border-radius: 1rem;
     position: relative;
-    overflow: hidden;
-    width: 120%;
-
+    width: 100%;
     height: auto;
 }
 
@@ -128,7 +127,7 @@ body {
 
 .music-img {
     object-fit: cover;
-    height: 9rem;
+    height: auto;
     width: 100%;
 }
 
@@ -321,4 +320,56 @@ body {
     height: 2px;
     height: 4px;
     margin: 0px 5px 0 7px;
+}
+
+/* --------------------------------------------------------------------- */
+
+
+
+
+/* ------------------------------------------------------------ */
+@media screen and (max-width: 1024px) {
+    .music-body {
+        width: 94%;
+    }
+
+    .nav-links{
+        font-size: 18px;
+    }
+
+    .music-info h2 {
+        font-size: 12px;
+    }
+}
+
+
+@media screen and (min-width: 1200px) {
+    .music-img img {
+        object-fit: cover;
+        padding-top: 12px;
+        width: 93%;
+        display: flex;
+        margin: auto;
+    }
+}
+
+
+@media screen and (min-width: 2360px) {
+    .music-body {
+        width: 111%;
+    }
+}
+
+
+
+@media screen and (min-width: 2560px) {
+    .music-body {
+        width: 120%;
+    }
+
+    .music-info h2 {
+        font-size: 2rem;
+    }
+
+
 }

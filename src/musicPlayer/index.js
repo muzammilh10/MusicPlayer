@@ -1,20 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 import './index.css'
 import Slider from '@mui/material/Slider';
 
-function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) {
+function MusicPlayer({ dataItems, currentIndex, setCurrentIndex }) {
     const [isPlaying, setIsPlaying] = useState(false);
-    cost [current]
+    const [currentAudio, setCurrentAudio] = useState('')
     const [audio, setAudio] = useState(null);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    console.log(currentIndex)
+    console.log({ currentTime })
+
+
     useEffect(() => {
         const sound = new Howl({
             src: [currentIndex.path],
             onplay: () => {
-                console.log('Playing...', dataItems[currentIndex]);
+                console.log('Playing...');
             },
             onpause: () => {
                 console.log('Paused...');
@@ -26,9 +28,6 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
             onload: () => {
                 setDuration(sound.duration());
             },
-            onseek: () => {
-                setCurrentTime(sound.seek());
-            },
         });
 
         setAudio(sound);
@@ -38,22 +37,41 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
         };
     }, [currentIndex]);
 
+
     useEffect(() => {
         if (audio && isPlaying) {
             const audioId = audio.play();
-            updateCurrentTime();
-        } else {
-            cancelAnimationFrame(updateCurrentTimeId.current);
+            setCurrentAudio(audioId)
+            console.log({ audio: audio.duration })
         }
     }, [audio, isPlaying]);
+
+
+    useEffect(() => {
+        let timerInterval;
+        if (audio) {
+            const updaterTimer = () => {
+                const seekTimer = Math.round(audio.seek())
+                setCurrentTime(seekTimer)
+            };
+            //The return value of setInterval is a unique identifier for the timer, 
+            //which is stored in the timerInterval variable in this case.
+            // This identifier can be used later with the clearInterval function to stop the recurring timer.
+            timerInterval = setInterval(updaterTimer, 1000)
+        }
+        return () => {
+            clearInterval(timerInterval)
+        }
+    }, [audio])
 
     const handlePlayPause = () => {
         if (audio) {
             if (isPlaying) {
                 audio.pause();
             } else {
-                 audio.play();
-                console.log({audioId})
+                audio.play(currentAudio);
+                audio.seek(currentAudio);
+
             }
             setIsPlaying(!isPlaying);
         }
@@ -63,7 +81,7 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
         setIsPlaying(false);
         const currentId = currentIndex.id;
         const nextItem = dataItems.find((item) => item.id > currentId);
-        console.log({nextItem})
+        console.log({ nextItem })
         if (nextItem) {
             setCurrentIndex(nextItem);
         } else {
@@ -78,7 +96,7 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
         if (prevItem) {
             setCurrentIndex(prevItem);
         } else {
-            setCurrentIndex(dataItems[dataItems.length-1]); // Loop to the last song if at the beginning of the list
+            setCurrentIndex(dataItems[dataItems.length - 1]); // Loop to the last song if at the beginning of the list
         }
     };
 
@@ -93,12 +111,6 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     };
 
-    const updateCurrentTimeId = useRef(null);
-
-    const updateCurrentTime = () => {
-        setCurrentTime(audio.seek());
-        updateCurrentTimeId.current = requestAnimationFrame(updateCurrentTime);
-    };
 
     return (
         <>
@@ -108,7 +120,12 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
                         <img src={currentIndex?.image} alt="song-images" id="img" />
                     </div>
                     <div className="music-info">
-                        <h2 id="title">{currentIndex?.title}</h2>
+                        <h2 id="title">
+
+
+                            {currentIndex?.title}
+
+                        </h2>
                     </div>
                     <div className="duration">
                         <span className="current-time">{formatTime(currentTime)}</span>
@@ -161,6 +178,7 @@ function MusicPlayer({ dataItems, currentIndex, setCurrentIndex, currentSong }) 
                         <ul>
                             {dataItems.map((song, index) => (
                                 <li key={index} onClick={() => handleSongSelect(index)}>
+
                                     {song.title}
                                 </li>
                             ))}

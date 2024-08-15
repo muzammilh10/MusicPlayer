@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import DND from './Component/DreagAndDrop/index';
 import Header from './Component/Header/Header';
-import MusicPlayer from './Component/musicPlayer/index';
+import MusicPlayer from './musicPlayer/index';
 
 const dataItems = [
   {
@@ -94,7 +94,7 @@ function App() {
           />
 
         </div>
-        <div className="column column-3">
+        <div className="column-3">
           <MusicPlayer
             dataItems={dataItems}
             currentIndex={currentIndex}
