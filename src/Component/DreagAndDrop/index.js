@@ -48,7 +48,7 @@ const DND = ({ dataItems, currentIndex, setCurrentIndex }) => {
     return (
         <>
             <div className="dnd_wrapper">
-                <h3 style={{ paddingTop: '32px' }}>Popular</h3>
+                <h3 style={{ paddingTop: '32px', paddingLeft:'20px' }}>Popular</h3>
                 {items.map((item, index) => (
                     <div
                         key={item.id}

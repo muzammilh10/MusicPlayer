@@ -13,12 +13,12 @@ body {
 
 .music-container {
     position: fixed;
-    bottom: 29px;
-    /* top: 36%; */
-    /* width: 100%; */
+    bottom: 0%;
+    /* top: 73%; */
+    left: 81%;
+    right: 1%;
     height: auto;
     margin: 12px;
-
 }
 
 .music-body {
@@ -221,7 +221,7 @@ body {
 .playpause {
     border: 0;
     /* outline: 0; */
-    font-size: 2rem;
+    font-size: 77%;
     background: rgb(66, 7, 7);
     color: #f8f6f8;
     cursor: pointer;
@@ -233,7 +233,7 @@ body {
 }
 
 .playpause {
-    font-size: 1.7rem;
+    font-size: 77%;
     /* position: absolute; */
     /* background: #7D30FA; */
     height: 3rem;
@@ -254,7 +254,7 @@ body {
     position: relative;
     /* border: 1px solid #b88ffa;
     border-radius: 2rem; */
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
     display: flex;
     justify-content: space-evenly;
     gap: 1.3rem;
@@ -316,7 +316,7 @@ body {
     color: #1976d2;
     height: 4px;
     width: 100%;
-    padding: 13px 0;
+    padding: 0 0;
     height: 2px;
     height: 4px;
     margin: 0px 5px 0 7px;
@@ -328,12 +328,32 @@ body {
 
 
 /* ------------------------------------------------------------ */
+
+@media screen and (max-width: 768px) {
+    
+    .main-controls {
+        padding: 0;
+    }
+
+    .prevbtn {
+        font-size: 77%;
+    }
+
+    .playpause {
+        font-size: 77%;
+    }
+
+    .nextbtn {
+        font-size: 77%;
+    }
+}
+
 @media screen and (max-width: 1024px) {
     .music-body {
         width: 94%;
     }
 
-    .nav-links{
+    .nav-links {
         font-size: 18px;
     }
 
@@ -356,15 +376,20 @@ body {
 
 @media screen and (min-width: 2360px) {
     .music-body {
-        width: 111%;
+        width: 108%;
     }
 }
 
 
 
-@media screen and (min-width: 2560px) {
+
+@media screen and (min-width: 2500px) {
     .music-body {
         width: 120%;
+    }
+
+    .music-container {
+        right: 4%;
     }
 
     .music-info h2 {
