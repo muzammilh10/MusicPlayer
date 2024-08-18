@@ -161,3 +161,11 @@ body,
   }
 
 }
+
+
+
+.test:after {
+  content: '\2807';
+  font-size: 15px;
+  margin-right: 10px;
+  }
