@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -330,7 +328,7 @@ body {
 /* ------------------------------------------------------------ */
 
 @media screen and (max-width: 768px) {
-    
+
     .main-controls {
         padding: 0;
     }

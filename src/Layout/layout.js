@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideNaveBar from "../Component/Sidenavbar/sideNavebar";
 import Header from "../Component/Header/Header";
 import DND from "../Component/DreagAndDrop";
-import MusicPlayer from '../musicPlayer/index';
+import MusicPlayer from '../Component/musicPlayer/index';
 
 
 import Routers from "./../Router/router";
