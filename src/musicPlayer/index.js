@@ -3,8 +3,8 @@ import { Howl } from 'howler';
 import './index.css'
 import Slider from '@mui/material/Slider';
 
-function MusicPlayer({ dataItems, currentIndex, setCurrentIndex }) {
-    const [isPlaying, setIsPlaying] = useState(false);
+function MusicPlayer({ dataItems, isPlaying,setIsPlaying, currentIndex, eetCurrentIndex }) {
+    // const [isPlaying, setIsPlaying] = useState(false);
     const [currentAudio, setCurrentAudio] = useState('')
     const [audio, setAudio] = useState(null);
     const [duration, setDuration] = useState(0);

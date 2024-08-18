@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import './index.css'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+
 
 // DND component
-const DND = ({ dataItems, currentIndex, setCurrentIndex }) => {
+const DND = ({ dataItems, currentIndex, setCurrentIndex, setIsPlaying }) => {
     const [items, setItems] = useState(dataItems); // items state
 
 
@@ -43,6 +37,7 @@ const DND = ({ dataItems, currentIndex, setCurrentIndex }) => {
 
     const handleClick = (item) => {
         setCurrentIndex(item);
+        setIsPlaying(true)
     }
 
     return (
