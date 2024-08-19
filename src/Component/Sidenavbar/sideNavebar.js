@@ -7,14 +7,14 @@ const SideNaveBar = () => {
     const dispatch = useDispatch()
 
     const navigate = useNavigate();
-    const { isAuthenticated } = useSelector((state) => state.account)
+    const {isAuthenticated } = useSelector((state) => state.account)
 
 
     // Clear localStorage and update state
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        dispatch(userLogout({ user: '' }))
+        dispatch(userLogout({user:''}))
         navigate('/login');
     };
 
