@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-
 const SideNaveBar = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    useEffect(() => {
+        // Check if token and user exist in localStorage
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        if (token && user) {
+            setIsAuthenticated(true);
+        }
+    }, []);
 
+    const handleLogout = () => {
+        // Clear localStorage and update state
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setIsAuthenticated(false);
+        navigate('/login');
+    };
 
     return (
         <>
@@ -33,18 +45,26 @@ const SideNaveBar = () => {
             </ul>
 
             <ul className='bottom_left_content'>
-                <li className="flex items-center space-x-2">
-                    <img src='./Settings.png' className="w-5 h-5" />
-                    <span>Setting</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                    <img src='./Log Out.png' className="w-5 h-5" />
-                    <span>Log Out</span>
-                </li>
+                {isAuthenticated ? (
+                    <li className="flex items-center space-x-2 cursor-pointer" onClick={handleLogout}>
+                        <img src='./Log Out.png' className="w-5 h-5" />
+                        <span>Log Out</span>
+                    </li>
+                ) : (
+                    <>
+                        <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/signup')}>
+                            <img src='./Log Out.png' className="w-5 h-5" />
+                            <span>SignUp</span>
+                        </li>
+                        <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/login')}>
+                            <img src='./Log Out.png' className="w-5 h-5" />
+                            <span>Login</span>
+                        </li>
+                    </>
+                )}
             </ul>
-
         </>
-    )
-}
+    );
+};
 
-export default SideNaveBar 
+export default SideNaveBar;
