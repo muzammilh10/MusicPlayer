@@ -20,6 +20,24 @@ async function fetchData(query) {
     console.error(error);
   }
 }
+async function Recomendaation() {
+  const url = 'https://shazam.p.rapidapi.com/songs/list-recommendations?key=484129036&locale=en-IN';
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': '0798be6c21msh7d4838f9c13ca31p1fa93ejsn06df65343653',
+      'x-rapidapi-host': 'shazam.p.rapidapi.com'
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.text();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 function Header() {
 
@@ -102,7 +120,7 @@ function Header() {
           className="w-full outline-none bg-transparent text-whitefont-semibold text-[15px]" />
       </div>
 
-   </header>
+    </header>
   );
 }
 

@@ -1,77 +1,72 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Howl } from 'howler';
 import './index.css'
 import Slider from '@mui/material/Slider';
 
-function MusicPlayer({ dataItems, isPlaying,setIsPlaying, currentIndex, eetCurrentIndex }) {
-    // const [isPlaying, setIsPlaying] = useState(false);
-    const [currentAudio, setCurrentAudio] = useState('')
+function MusicPlayer({ dataItems, isPlaying, setIsPlaying, currentIndex, setCurrentIndex }) {
     const [audio, setAudio] = useState(null);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    console.log({ currentTime })
-
 
     useEffect(() => {
-        const sound = new Howl({
-            src: [currentIndex.path],
-            onplay: () => {
-                console.log('Playing...');
-            },
-            onpause: () => {
-                console.log('Paused...');
-            },
-            onend: () => {
-                console.log('Finished...');
-                handleNext();
-            },
-            onload: () => {
-                setDuration(sound.duration());
-            },
-        });
+        if (currentIndex.path) {
+            const sound = new Howl({
+                src: [currentIndex.path],
+                onplay: () => console.log('Playing...'),
+                onpause: () => console.log('Paused...'),
+                onend: () => {
+                    console.log('Finished...');
+                    handleNext();
+                },
+                onload: () => {
+                    setDuration(sound.duration());
+                },
+            });
 
-        setAudio(sound);
+            setAudio(sound);
 
-        return () => {
-            sound.unload();
-        };
+            return () => {
+                sound.unload();
+            };
+        }
     }, [currentIndex]);
 
-
     useEffect(() => {
-        if (audio && isPlaying) {
-            const audioId = audio.play();
-            setCurrentAudio(audioId)
-            console.log({ audio: audio.duration })
+        if (audio) {
+            if (isPlaying) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
         }
     }, [audio, isPlaying]);
-
 
     useEffect(() => {
         let timerInterval;
         if (audio) {
             const updaterTimer = () => {
-                const seekTimer = Math.round(audio.seek())
-                setCurrentTime(seekTimer)
+                const seekTimer = Math.round(audio.seek());
+                setCurrentTime(seekTimer);
             };
-            //The return value of setInterval is a unique identifier for the timer, 
-            //which is stored in the timerInterval variable in this case.
-            // This identifier can be used later with the clearInterval function to stop the recurring timer.
-            timerInterval = setInterval(updaterTimer, 1000)
+            timerInterval = setInterval(updaterTimer, 1000);
         }
-        return () => {
-            clearInterval(timerInterval)
+        return () => clearInterval(timerInterval);
+    }, [audio]);
+
+    const handleSliderChange = (event, value) => {
+        const newTime = parseFloat(value);
+        setCurrentTime(newTime);
+        if (audio) {
+            audio.seek(newTime);
         }
-    }, [audio])
+    };
 
     const handlePlayPause = () => {
         if (audio) {
             if (isPlaying) {
                 audio.pause();
             } else {
-                audio.play(currentAudio);
-                audio.seek(currentAudio);
-
+                audio.play();
             }
             setIsPlaying(!isPlaying);
         }
@@ -81,7 +76,6 @@ function MusicPlayer({ dataItems, isPlaying,setIsPlaying, currentIndex, eetCurre
         setIsPlaying(false);
         const currentId = currentIndex.id;
         const nextItem = dataItems.find((item) => item.id > currentId);
-        console.log({ nextItem })
         if (nextItem) {
             setCurrentIndex(nextItem);
         } else {
@@ -102,7 +96,7 @@ function MusicPlayer({ dataItems, isPlaying,setIsPlaying, currentIndex, eetCurre
 
     const handleSongSelect = (index) => {
         setIsPlaying(false);
-        setCurrentIndex(index);
+        setCurrentIndex(dataItems[index]);
     };
 
     const formatTime = (seconds) => {
@@ -111,82 +105,73 @@ function MusicPlayer({ dataItems, isPlaying,setIsPlaying, currentIndex, eetCurre
         return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
     };
 
-
     return (
-        <>
-            <div className="music-container">
-                <div className="music-body">
-                    <div className="music-img">
-                        <img src={currentIndex?.image} alt="song-images" id="img" />
-                    </div>
-                    <div className="music-info">
-                        <h2 id="title">
-
-
-                            {currentIndex?.title}
-
-                        </h2>
-                    </div>
-                    <div className="duration">
-                        <span className="current-time">{formatTime(currentTime)}</span>
-                        <Slider
-                            aria-label="time-indicator"
-                            size="small"
-                            value={currentTime}
-                            min={0}
-                            step={1}
-                            max={duration}
-                            onChange={(_, value) => setCurrentTime(value)}
-                            sx={{
-                                height: 4,
-                                '& .MuiSlider-thumb': {
-                                    width: 8,
-                                    height: 8,
-                                    transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
-                                    '&::before': {
-                                        boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
-                                    },
-                                    '&.Mui-active': {
-                                        width: 20,
-                                        height: 20,
-                                    },
+        <div className="music-container">
+            <div className="music-body">
+                <div className="music-img">
+                    <img src={currentIndex?.image} alt="song-images" id="img" />
+                </div>
+                <div className="music-info">
+                    <h2 id="title">{currentIndex?.title}</h2>
+                </div>
+                <div className="duration">
+                    <span className="current-time">{formatTime(currentTime)}</span>
+                    <Slider
+                        aria-label="time-indicator"
+                        size="small"
+                        value={currentTime}
+                        min={0}
+                        step={1}
+                        max={duration}
+                        onChange={handleSliderChange}
+                        sx={{
+                            height: 4,
+                            '& .MuiSlider-thumb': {
+                                width: 8,
+                                height: 8,
+                                transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+                                '&::before': {
+                                    boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
                                 },
-                                '& .MuiSlider-rail': {
-                                    opacity: 0.28,
+                                '&.Mui-active': {
+                                    width: 20,
+                                    height: 20,
                                 },
-                            }}
-                        />
-                        <span className="duration-time">{formatTime(duration)}</span>
-                    </div>
-                    <div className="music-controls">
-                        <div className="main-controls">
-                            <button className="prevbtn" id="prevbtn" onClick={handlePrevious}>
-                                <i className="fas fa-backward"></i>
-                            </button>
-                            <button className="playpause" id="playpause" onClick={handlePlayPause}>
-                                {isPlaying ? <i id="playpause-btn" className="fas fa-pause" /> : <i id="playpause-btn" className="fas fa-play" />}
-                            </button>
-                            <button className="nextbtn" id="nextbtn" onClick={handleNext}>
-                                <i className="fa-solid fa-forward-step" />
-                            </button>
-                        </div>
-                    </div>
-                    <div className="songs-list" id="songs-list">
-                        <button className="list-close btn" id="listclose">
-                            <i className="fas fa-times"></i>
+                            },
+                            '& .MuiSlider-rail': {
+                                opacity: 0.28,
+                            },
+                        }}
+                    />
+                    <span className="duration-time">{formatTime(duration)}</span>
+                </div>
+                <div className="music-controls">
+                    <div className="main-controls">
+                        <button className="prevbtn" id="prevbtn" onClick={handlePrevious}>
+                            <i className="fas fa-backward"></i>
                         </button>
-                        <ul>
-                            {dataItems.map((song, index) => (
-                                <li key={index} onClick={() => handleSongSelect(index)}>
-
-                                    {song.title}
-                                </li>
-                            ))}
-                        </ul>
+                        <button className="playpause" id="playpause" onClick={handlePlayPause}>
+                            {isPlaying ? <i id="playpause-btn" className="fas fa-pause" /> : <i id="playpause-btn" className="fas fa-play" />}
+                        </button>
+                        <button className="nextbtn" id="nextbtn" onClick={handleNext}>
+                            <i className="fa-solid fa-forward-step" />
+                        </button>
                     </div>
                 </div>
+                <div className="songs-list" id="songs-list">
+                    <button className="list-close btn" id="listclose">
+                        <i className="fas fa-times"></i>
+                    </button>
+                    <ul>
+                        {dataItems.map((song, index) => (
+                            <li key={index} onClick={() => handleSongSelect(index)}>
+                                {song.title}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-        </>
+        </div>
     );
 }
 
