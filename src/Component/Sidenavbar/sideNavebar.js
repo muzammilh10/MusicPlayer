@@ -12,7 +12,7 @@ const SideNaveBar = () => {
 
     return (
         <>
-            <img class="h-auto max-w-full p-5 pt-3 ml-6" src='./logo.png' alt="image description" />
+            <img className="h-auto max-w-full p-5 pt-3 ml-6" src='./logo.png' alt="image description" />
             <ul className='menuStyle'>
                 <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/home')}>
                     <img src='./vector.png' className="w-5 h-5" />
