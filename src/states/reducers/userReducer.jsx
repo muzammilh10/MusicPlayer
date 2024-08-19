@@ -11,6 +11,8 @@ export const userReducer = (
     }, action) => {
     switch (action.type) {
         case USER_LOGGED_IN:
+
+        console.log({usessssssssssssssssssssssr:action.payload})
             return { ...state, user: action.payload, isAuthenticated: true }
 
         case USER_LOGGED_OUT:

@@ -13,7 +13,7 @@ const Login = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(true)
 
-    const openModal = () => setIsModalOpen(true)
+    // const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
 
     const onChanage = (e) => {
@@ -40,20 +40,28 @@ const Login = () => {
             body: data,
         })
 
+
         const d = await res.json()
+
         if (d.success) {
             toast.success(d.message);
             localStorage.setItem("token", JSON.stringify(d.token))
-            dispatch(userActor(data.user))
+            console.log({ d })
+            dispatch(userActor(d.user))
             navigate('/')
         }
         else {
             toast.error(d.message);
         }
     }
+
+    const handleClose = () => {
+        closeModal()
+        navigate('/')
+    }
     return (
         <>
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <Modal isOpen={isModalOpen} onClose={handleClose}>
                 <div className="bg-white">
                     <div className='bg-white text-black text-center mx-auto '>
                         <h6 className='text-xl font-bold my-1'>Sign up for free to start listening</h6>

@@ -1,30 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogout } from '../../states/actors/userActor'
 
 const SideNaveBar = () => {
+    const dispatch = useDispatch()
+
     const navigate = useNavigate();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const { isAuthenticated } = useSelector((state) => state.account)
 
-    useEffect(() => {
-        // Check if token and user exist in localStorage
-        const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user');
-        if (token && user) {
-            setIsAuthenticated(true);
-        }
-    }, []);
 
+    // Clear localStorage and update state
     const handleLogout = () => {
-        // Clear localStorage and update state
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        setIsAuthenticated(false);
+        dispatch(userLogout({ user: '' }))
         navigate('/login');
     };
 
     return (
         <>
-            <img className="h-auto max-w-full p-5 pt-3 ml-6" src='./logo.png' alt="image description" />
+            <img className="h-auto max-w-full p-5 pt-5 ml-3 logostyle" src='./logo.png' alt="image description" />
             <ul className='menuStyle'>
                 <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/home')}>
                     <img src='./vector.png' className="w-5 h-5" />
@@ -40,7 +36,7 @@ const SideNaveBar = () => {
                 </li>
                 <li className="flex items-center space-x-2 cursor-pointer">
                     <img src='./vector (3).png' className="w-5 h-5" />
-                    <span>Discover</span>
+                    <span>Create Playlist</span>
                 </li>
             </ul>
 
