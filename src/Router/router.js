@@ -6,10 +6,11 @@ import Signup from './../Component/Signup/Signup'
 
 import Home from './../Pages/Home'
 import DND from "../Component/DreagAndDrop";
+import PlayListSong from "../Component/PlaylistSong/PlaylistSong";
 
 
 
-const Routers = ({ setIsPlaying, setCurrentIndex ,currentIndex,dataItems}) => {
+const Routers = ({ setIsPlaying, setCurrentIndex, currentIndex, dataItems }) => {
     return (
         <Routes >
             <Route path='/' exact element={<Navigate to='/home' />} />
@@ -17,6 +18,8 @@ const Routers = ({ setIsPlaying, setCurrentIndex ,currentIndex,dataItems}) => {
             <Route path='/playlist' element={<DND setIsPlaying={setIsPlaying} setCurrentIndex={setCurrentIndex} currentIndex={currentIndex} dataItems={dataItems} />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
+            <Route path='/playlist/:id' element={<PlayListSong setCurrentIndex={setCurrentIndex} setIsPlaying={setIsPlaying} />} />
+
             {/* <Route path="/about" element={<About />} /> */}
             {/* <Route path="/gallery" element={<MasonaryGallryImages />} /> */}
             {/* <Route path='/tours/:id' element={<TourDetails />} />
