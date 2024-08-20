@@ -128,7 +128,7 @@ const Home = ({ setIsPlaying, setCurrentIndex, currentIndex }) => {
 
     return (
         <div class="container px-6 ">
-            <div class="grid grid-cols-1 mt-8 gap-1 xl:mt-12 xl:gap-12 sm:grid-cols-3 xl:grid-cols-5 lg:grid-cols-4">
+            <div class="grid grid-cols-1 mt-8 gap-1 xl:mt-12 xl:gap-1 sm:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4">
                 {dataItems.map((item, index) => (
                     <div
                         key={index}
