@@ -22,13 +22,14 @@ const Layout = ({ dataItems, currentIndex, setCurrentIndex }) => {
     // }
 
     return (
-        <div className="containers">
+        <div className="containers overflow-hidden h-screen">
 
             <div className="column-1">
                 <SideNaveBar />
             </div>
 
-            <div className=" column-60">
+
+            <div className="column-60 overflow-y-auto h-screen custom-scrollbar">
                 <Header className='headerStyle' />
                 <Routers dataItems={dataItems} setIsPlaying={setIsPlaying} setCurrentIndex={setCurrentIndex} currentIndex={currentIndex} />
             </div >

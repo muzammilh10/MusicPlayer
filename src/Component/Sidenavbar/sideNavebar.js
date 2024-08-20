@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../../states/actors/userActor'
 import ReactDOM from 'react-dom';
 import { addPlaylist } from './../../states/actors/playlistActor';
+import Playlist from "../PlayList/Playlist";
 
 
 const Popup = ({ isOpen, onClose, onSubmit, newPlaylistName, setNewPlaylistName }) => {
@@ -40,7 +41,7 @@ const SideNaveBar = () => {
     const [newPlaylistName, setNewPlaylistName] = useState("");
     // const playlists = useSelector(state => state.playlist.playlists);
 
-    console.log({playlists})
+    console.log({ playlists })
 
 
     console.log({ playlists })
@@ -68,24 +69,24 @@ const SideNaveBar = () => {
 
     return (
         <>
-            <img className="h-auto max-w-full p-5 pt-5 ml-3 logostyle" src='./logo.png' alt="image description" />
+            <img className="h-auto max-w-full p-4 pt-5 logostyle" src='./logo.png' alt="image description" />
             <ul className='menuStyle'>
                 <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/home')}>
                     <img src='./vector.png' className="w-5 h-5" />
                     <span>Home</span>
                 </li>
-                <li className="flex items-center space-x-2 cursor-pointer">
+                {/* <li className="flex items-center space-x-2 cursor-pointer">
                     <img src='./vector (2).png' className="w-5 h-5" />
                     <span>Trends</span>
-                </li>
+                </li> */}
                 <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/playlist')}>
                     <img src='./vector (1).png' className="w-5 h-5" />
                     <span>Playlist</span>
                 </li>
-                <li className="flex items-center space-x-2 cursor-pointer" onClick={() => setIsPopupOpen(true)}>
+                {/* <li className="flex items-center space-x-2 cursor-pointer" onClick={() => setIsPopupOpen(true)}>
                     <img src='./vector (3).png' className="w-5 h-5" />
                     <span>Create Playlist</span>
-                </li>
+                </li> */}
             </ul>
 
             {/* Popup component using createPortal */}
@@ -106,6 +107,8 @@ const SideNaveBar = () => {
                     </li>
                 ))}
             </ul>
+            
+            <Playlist />
 
             <ul className='bottom_left_content'>
                 {isAuthenticated ? (
@@ -126,6 +129,8 @@ const SideNaveBar = () => {
                     </>
                 )}
             </ul>
+
+
         </>
     );
 };
