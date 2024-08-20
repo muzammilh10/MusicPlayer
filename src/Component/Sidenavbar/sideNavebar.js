@@ -34,6 +34,7 @@ const Popup = ({ isOpen, onClose, onSubmit, newPlaylistName, setNewPlaylistName 
 const SideNaveBar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const token = localStorage.getItem('token')
     const { isAuthenticated } = useSelector((state) => state.account)
 
     const [playlists, setPlaylists] = useState([]);
@@ -54,13 +55,37 @@ const SideNaveBar = () => {
     };
 
     // Handle creating a new playlist
-    const handleCreatePlaylist = () => {
-        if (newPlaylistName) {
-            setPlaylists([...playlists, newPlaylistName]);
-            setNewPlaylistName("");
-            setIsPopupOpen(false);
+
+    const handleCreatePlaylist = async () => {
+        if (newPlaylistName.trim()) {
+            try {
+                const response = await fetch(`http://localhost:5001/api/user/playlists`, {
+                    method: 'POST',
+                    body: JSON.stringify({ name: newPlaylistName }), // Wrap newPlaylistName in an object
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${JSON.parse(token)}`,
+                    },
+                });
+
+                if (response.ok) { // response.ok is true if the status code is between 200-299
+                    const createdPlaylist = await response.json(); // Parse the JSON body
+                    setPlaylists([...playlists, createdPlaylist.name]); // Update the state with the new playlist
+                    handleAddPlaylist(createdPlaylist); // Update the Redux store with the new playlist
+                    setNewPlaylistName(''); // Clear the input field
+                    setIsPopupOpen(false); // Close the popup
+                } else {
+                    const errorData = await response.json();
+                    console.error('Failed to create playlist:', errorData.message);
+                }
+            } catch (error) {
+                console.error('Error creating playlist:', error);
+            }
+        } else {
+            alert('Playlist name cannot be empty.');
         }
     };
+
 
     return (
         <>
