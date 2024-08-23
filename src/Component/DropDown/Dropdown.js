@@ -12,29 +12,31 @@ const DropdownMenu = ({ playlistDetail = {} }) => {
   console.log({ playlistDetail })
 
 
-
   const handlePlaylistClick = async (playlistData) => {
     try {
+      console.log({ uniqueId:playlistData.uniqueId, playlistDetail });
 
-      console.log({ playlistData })
-      const response = await fetch(`api/playlist/${playlistData.id}`, {
-        method: 'POST',
+      const response = await fetch(`http://localhost:5001/api/playlist/${playlistData.uniqueId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({playlistDetail}),
+        body: JSON.stringify(playlistDetail), 
       });
+
+      console.log({response})
 
       if (response.ok) {
         console.log('Song added to playlist:', playlistData.name);
         // Optionally, you can update the UI or handle success here
       } else {
-        console.error('Failed to add song to playlist');
+        console.error('Failed to add song to playlist', await response.json());
       }
     } catch (error) {
       console.error('Error adding song to playlist:', error);
     }
   };
+
 
 
   return (
