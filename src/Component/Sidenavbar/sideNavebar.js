@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { userLogout } from '../../states/actors/userActor'
+import { userLogout, userPlaylist } from '../../states/actors/userActor'
 import ReactDOM from 'react-dom';
 import { addPlaylist } from './../../states/actors/playlistActor';
 import Playlist from "../PlayList/Playlist";
@@ -55,6 +55,7 @@ const SideNaveBar = () => {
     };
 
     // Handle creating a new playlist
+    console.log({newPlaylistName})
 
     const handleCreatePlaylist = async () => {
         if (newPlaylistName.trim()) {
@@ -74,6 +75,7 @@ const SideNaveBar = () => {
                     handleAddPlaylist(createdPlaylist); // Update the Redux store with the new playlist
                     setNewPlaylistName(''); // Clear the input field
                     setIsPopupOpen(false); // Close the popup
+                    // dispatch(userPlaylist(newPlaylistName))
                 } else {
                     const errorData = await response.json();
                     console.error('Failed to create playlist:', errorData.message);
@@ -86,6 +88,7 @@ const SideNaveBar = () => {
         }
     };
 
+    console.log({ playlists })
 
     return (
         <>
@@ -95,18 +98,16 @@ const SideNaveBar = () => {
                     <img src='./vector.png' className="w-5 h-5" />
                     <span>Home</span>
                 </li>
-                {/* <li className="flex items-center space-x-2 cursor-pointer">
-                    <img src='./vector (2).png' className="w-5 h-5" />
-                    <span>Trends</span>
-                </li> */}
                 <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/playlist')}>
                     <img src='./vector (1).png' className="w-5 h-5" />
                     <span>Playlist</span>
                 </li>
-                <li className="flex items-center space-x-2 cursor-pointer" onClick={() => setIsPopupOpen(true)}>
-                    <img src='./vector (3).png' className="w-5 h-5" />
-                    <span>Create Playlist</span>
-                </li>
+                {isAuthenticated &&
+                    <li className="flex items-center space-x-2 cursor-pointer" onClick={() => setIsPopupOpen(true)}>
+                        <img src='./vector (3).png' className="w-5 h-5" />
+                        <span>Create Playlist</span>
+                    </li>
+                }
             </ul>
 
             {/* Popup component using createPortal */}
@@ -120,14 +121,14 @@ const SideNaveBar = () => {
 
             {/* Display the list of playlists */}
             <ul className='playlist-list'>
-                {playlists.map((playlist, index) => (
+                {playlists?.map((playlist, index) => (
                     <li key={index} className="flex items-center space-x-2 cursor-pointer">
                         <img src='./vector (1).png' className="w-5 h-5" />
                         <span>{playlist}</span>
                     </li>
                 ))}
             </ul>
-            
+
             <Playlist />
 
             <ul className='bottom_left_content'>

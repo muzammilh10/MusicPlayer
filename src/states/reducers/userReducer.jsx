@@ -1,7 +1,8 @@
 import {
     USER_LOGGED_IN,
     USER_LOGGED_OUT,
-    USER_ABOUT
+    USER_ABOUT,
+    UPDATE_USER_PLAYLISTS
 } from "../constants/userConstant.jsx"
 
 const initialState = {
@@ -22,6 +23,17 @@ export const userReducer = (state = initialState, action) => {
 
         case USER_ABOUT:
             return { ...state, user: action.payload, isAuthenticated: true };
+
+        case UPDATE_USER_PLAYLISTS:
+
+            console.log({ UPDATE_USER_PLAYLISTS: action.payload })
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    playlists: [ {name:action.payload}, ...state.user.playlists ],
+                },
+            };
 
         default:
             return state;

@@ -1,7 +1,8 @@
 import {
     USER_LOGGED_IN,
     USER_ABOUT,
-    USER_LOGGED_OUT
+    USER_LOGGED_OUT,
+    UPDATE_USER_PLAYLISTS
 } from "../constants/userConstant.jsx"
 
 export const userActor = (user) => async (dispatch) => {
@@ -13,6 +14,15 @@ export const userActor = (user) => async (dispatch) => {
     })
 }
 
+
+export const userPlaylist  = (user) => async (dispatch) => {
+
+    console.log({ user })
+    dispatch({
+        type: UPDATE_USER_PLAYLISTS,
+        payload: user
+    })
+}
 
 export const userLogout = (user) => async (dispatch) => {
 

@@ -68,12 +68,10 @@ const DND = ({ dataItems, currentIndex, setCurrentIndex, setIsPlaying }) => {
 // Card component
 const Card = ({ title, image, duration, path, singer }) => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 
     const handleDropdownToggle = () => {
         setDropdownVisible(!dropdownVisible);
-        setIsDropdownOpen(!isDropdownOpen);
 
     };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { json } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -116,52 +116,44 @@ const dataItems = [
     },
 ];
 
-const Playlist = ({onClick}) => {
+const Playlist = ({ onClick }) => {
 
-    const token = localStorage.getItem('token')
-    // const [fwefe, setPlaylist] = useState([]);
-    // console.log({fwefe})
+    const navigate = useNavigate();
 
     const { user, isAuthenticated } = useSelector((state) => state.account)
     const { playlists } = user
 
-    // useEffect(() => {
-    //     // Replace with your API endpoint and fetch method
-    //     fetch('http://localhost:5001/api/user/', {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             Authorization: `Bearer ${JSON.parse(token)}`,
-    //         },
-    //         body: {}
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => setPlaylist(data)) // Assuming 'songs' is the key for the playlist array
-    //         .catch(error => console.error('Error fetching playlist:', error));
-    // }, []);
+    console.log({PluginArray:playlists})
 
     return (
+
         <div className="container min-h-[50vh] p-4" style={{
             position: 'relative',
             minHeight: '50vh',
             bottom: '13%',
-        }}>
-            <h1 className="text-xl font-bold text-center mb-1 rounded-sm bg-gray-900">Your Playlist</h1>
-            <div className=" shadow-lg h-64 overflow-y-auto custom-scrollbar custom-scrollbar1">
-                <ul>
-                    {playlists?.map((playlist, index) => (
-                        <li
-                            onClick={() => onClick(playlist)}
-                            key={index}
-                            className="flex justify-between items-center p-2 mb-2 bg-red rounded-lg shadow hover:bg-gray-900"
-                        >
-                            <div className="truncate">
-                                <p className="text-sm font-semibold truncate">{playlist.name}</p>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+        }}>{
+                isAuthenticated &&
+                <>
+                    <h1 className="text-xl font-bold text-center mb-1 rounded-sm bg-gray-900">Your Playlist</h1>
+                    <div className=" shadow-lg h-64 overflow-y-auto custom-scrollbar custom-scrollbar1">
+                        <ul>
+                            {playlists?.map((playlist, index) => (
+                                <li
+                                    onClick={onClick ? () => onClick(playlist) : () => { navigate(`/playlist/${playlist._id}`) }}
+                                    key={index}
+                                    className="flex justify-between items-center p-2 mb-2 bg-red rounded-lg shadow hover:bg-gray-900"
+                                >
+                                    <div className="truncate">
+                                        <p className="text-sm font-semibold truncate">{playlist.name}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </>}
         </div>
+
+
     );
 };
 
