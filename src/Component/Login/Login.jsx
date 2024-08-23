@@ -39,15 +39,13 @@ const Login = () => {
             },
             body: data,
         })
-
-
         const d = await res.json()
-
-        console.log({d})
+        console.log({ d })
 
         if (d.success) {
             toast.success(d.message);
-            localStorage.setItem("token", JSON.stringify(d.token))
+            localStorage.setItem("token", JSON.stringify(d.token));
+            localStorage.setItem("user", JSON.stringify(d.user));
             console.log({ d })
             dispatch(userActor(d.user))
             navigate('/')

@@ -123,3 +123,9 @@ h1 {
     background-color: #4c0808; /* Highlight the currently playing song */
     color: white; /* Optional: Change text color for better contrast */
 }
+
+
+
+.DropdownMenu{
+  position: relative;
+}

@@ -116,48 +116,46 @@ const dataItems = [
     },
 ];
 
-const Playlist = () => {
+const Playlist = ({onClick}) => {
 
     const token = localStorage.getItem('token')
-    console.log({token:JSON.parse(token)})
-    const [fwefe, setPlaylist] = useState([]);
-    console.log({ fwefe })
+    // const [fwefe, setPlaylist] = useState([]);
+    // console.log({fwefe})
 
     const { user, isAuthenticated } = useSelector((state) => state.account)
-
     const { playlists } = user
-    console.log("playlists")
 
-    useEffect(() => {
-        // Replace with your API endpoint and fetch method
-        fetch('http://localhost:5001/api/user/', {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${JSON.parse(token)}`,
-            },
-            body:{}
-        })
-            .then(response => response.json())
-            .then(data => setPlaylist(data)) // Assuming 'songs' is the key for the playlist array
-            .catch(error => console.error('Error fetching playlist:', error));
-    }, []);
+    // useEffect(() => {
+    //     // Replace with your API endpoint and fetch method
+    //     fetch('http://localhost:5001/api/user/', {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             Authorization: `Bearer ${JSON.parse(token)}`,
+    //         },
+    //         body: {}
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => setPlaylist(data)) // Assuming 'songs' is the key for the playlist array
+    //         .catch(error => console.error('Error fetching playlist:', error));
+    // }, []);
 
     return (
-        <div className="container p-4" style={{
+        <div className="container min-h-[50vh] p-4" style={{
             position: 'relative',
-            top: '32%',
+            minHeight: '50vh',
+            bottom: '13%',
         }}>
             <h1 className="text-xl font-bold text-center mb-1 rounded-sm bg-gray-900">Your Playlist</h1>
             <div className=" shadow-lg h-64 overflow-y-auto custom-scrollbar custom-scrollbar1">
                 <ul>
-                    {playlists?.map((song, index) => (
+                    {playlists?.map((playlist, index) => (
                         <li
+                            onClick={() => onClick(playlist)}
                             key={index}
                             className="flex justify-between items-center p-2 mb-2 bg-red rounded-lg shadow hover:bg-gray-900"
                         >
                             <div className="truncate">
-                                <p className="text-sm font-semibold truncate">{song.name}</p>
-                                {/* <p className="text-sm text-gray-500 truncate">{song.artist}</p> */}
+                                <p className="text-sm font-semibold truncate">{playlist.name}</p>
                             </div>
                         </li>
                     ))}

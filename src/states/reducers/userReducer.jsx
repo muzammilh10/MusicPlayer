@@ -4,24 +4,26 @@ import {
     USER_ABOUT
 } from "../constants/userConstant.jsx"
 
-export const userReducer = (
-    state = {
-        user: {},
-        isAuthenticated: false
-    }, action) => {
+const initialState = {
+    user: JSON.parse(localStorage.getItem("user")) || {},
+    isAuthenticated: !!localStorage.getItem("token")
+};
+console.log({ initialState })
+export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_LOGGED_IN:
-
-        console.log({usessssssssssssssssssssssr:action.payload})
-            return { ...state, user: action.payload, isAuthenticated: true }
+            localStorage.setItem("user", JSON.stringify(action.payload));
+            return { ...state, user: action.payload, isAuthenticated: true };
 
         case USER_LOGGED_OUT:
-            return { ...state, user: {}, isAuthenticated: false }
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            return { ...state, user: {}, isAuthenticated: false };
 
         case USER_ABOUT:
-            return { ...state, user: action.payload, isAuthenticated: true }
+            return { ...state, user: action.payload, isAuthenticated: true };
 
         default:
-            return state
+            return state;
     }
 }
