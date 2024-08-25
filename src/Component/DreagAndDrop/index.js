@@ -70,7 +70,8 @@ const Card = ({ title, image, duration, path, singer }) => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
 
-    const handleDropdownToggle = () => {
+    const handleDropdownToggle = (e) => {
+        e.stopPropagation();
         setDropdownVisible(!dropdownVisible);
 
     };

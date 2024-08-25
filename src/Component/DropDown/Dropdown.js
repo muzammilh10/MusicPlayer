@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import Playlist from '../PlayList/Playlist';
+import { useSelector } from 'react-redux';
 
 const DropdownMenu = ({ playlistDetail = {} }) => {
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSubDropdownOpen, setIsSubDropdownOpen] = useState(false);
+  const { isAuthenticated } = useSelector((state) => state.account)
 
-  const toggleSubDropdown = () => {
+
+  const toggleSubDropdown = (e) => {
+    e.stopPropagation();
     setIsSubDropdownOpen(!isSubDropdownOpen);
   };
 
@@ -34,11 +38,6 @@ const DropdownMenu = ({ playlistDetail = {} }) => {
     }
   };
 
-  const handleRemovePlaylist = () => {
-
-  }
-
-
 
   return (
     <div className="relative inline-block text-left right-48 top-4">
@@ -51,73 +50,49 @@ const DropdownMenu = ({ playlistDetail = {} }) => {
             className="py-2 text-sm text-gray-700 dark:text-gray-200 order-2"
             aria-labelledby="multiLevelDropdownButton"
           >
-            <li>
-              <button
-                id="doubleDropdownButton"
-                onClick={toggleSubDropdown}
-                type="button"
-                className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white order-2"
-              >
-                Add to Playlist
-                <svg
-                  className="w-2.5 h-2.5 ms-3 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
+            {isAuthenticated &&
+              <li>
+                <button
+                  id="doubleDropdownButton"
+                  onClick={toggleSubDropdown}
+                  type="button"
+                  className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white order-2"
                 >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
-              </button>
-
-              {/* Sub-dropdown menu */}
-              {isSubDropdownOpen && (
-                <div
-                  id="doubleDropdown"
-                  className="z-10 absolute mr-2 top-0 right-full bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                >
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="doubleDropdownButton"
+                  Add to Playlist
+                  <svg
+                    className="w-2.5 h-2.5 ms-3 rtl:rotate-180"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 6 10"
                   >
-                    <Playlist onClick={handlePlaylistClick}
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 9 4-4-4-4"
                     />
-                  </ul>
-                </div>
-              )}
-            </li>
-            <li>
-              <button
-                id="doubleDropdownButton"
-                onClick={toggleSubDropdown}
-                type="button"
-                className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white order-2"
-              >
-                Remove  Playlist
-                <svg
-                  className="w-2.5 h-2.5 ms-3 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
-              </button>
+                  </svg>
+                </button>
 
-            </li>
+                {/* Sub-dropdown menu */}
+                {isSubDropdownOpen && (
+                  <div
+                    id="doubleDropdown"
+                    className="z-10 absolute mr-2 top-0 right-full bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                  >
+                    <ul
+                      className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="doubleDropdownButton"
+                    >
+                      <Playlist onClick={handlePlaylistClick}
+                      />
+                    </ul>
+                  </div>
+                )}
+              </li>
+            }
           </ul>
         </div>
       )}

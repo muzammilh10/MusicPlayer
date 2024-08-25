@@ -69,12 +69,12 @@ const SideNaveBar = () => {
                     },
                 });
 
-                if (response.ok) { // response.ok is true if the status code is between 200-299
-                    const createdPlaylist = await response.json(); // Parse the JSON body
-                    setPlaylists([...playlists, createdPlaylist.name]); // Update the state with the new playlist
-                    handleAddPlaylist(createdPlaylist); // Update the Redux store with the new playlist
-                    setNewPlaylistName(''); // Clear the input field
-                    setIsPopupOpen(false); // Close the popup
+                if (response.ok) { 
+                    const createdPlaylist = await response.json(); 
+                    setPlaylists([...playlists, createdPlaylist.name]);
+                    handleAddPlaylist(createdPlaylist); 
+                    setNewPlaylistName('');
+                    setIsPopupOpen(false); 
                     // dispatch(userPlaylist(newPlaylistName))
                 } else {
                     const errorData = await response.json();
@@ -88,7 +88,6 @@ const SideNaveBar = () => {
         }
     };
 
-    console.log({ playlists })
 
     return (
         <>
