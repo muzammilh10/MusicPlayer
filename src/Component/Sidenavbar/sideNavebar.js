@@ -43,9 +43,6 @@ const SideNaveBar = () => {
     const [newPlaylistName, setNewPlaylistName] = useState("");
     // const playlists = useSelector(state => state.playlist.playlists);
 
-    const handleAddPlaylist = (playlist) => {
-        dispatch(addPlaylist(playlist));
-    };
 
     // Handle logout
     const handleLogout = () => {
@@ -80,9 +77,6 @@ const SideNaveBar = () => {
                     // dispatch(userPlaylist(createdPlaylist));
                 } else {
                     const errorData = await response.json();
-                    toast("Default Notification !", {
-                        position: "top-center",
-                    });
                     console.error('Failed to create playlist:', errorData.message);
                 }
             } catch (error) {

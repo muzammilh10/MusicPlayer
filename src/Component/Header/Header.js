@@ -21,7 +21,7 @@ const Header = () => {
         <div id="collapseMenu"
           className={`max-lg:hidden lg:!flex lg:items-center ${isMenuOpen ? 'block' : 'hidden'}`}
           style={{ display: isMenuOpen ? 'block' : 'none' }}>
-          <button id="toggleClose" onClick={toggleMenu} className='lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3'>
+          <button id="toggleClose" onClick={toggleMenu} className='lg:hidden sm-hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3'>
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 fill-black" viewBox="0 0 320.591 320.591">
               <path
                 d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
@@ -31,7 +31,7 @@ const Header = () => {
                 data-original="#000000"></path>
             </svg>
           </button>
-          <ul className='lg:flex lg:gap-x-10 lg:absolute lg:left-1/2 lg:-translate-x-1/2 max-lg:space-y-3 max-lg:fixed max-lg:bg-[linear-gradient(to_bottom,rgb(45,2,2),rgb(0,0,0))] max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:px-10 max-lg:py-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50 lg:hidden'>
+          <ul className='lg:flex lg:gap-x-10 lg:absolute lg:left-1/2 lg:-translate-x-1/2 max-lg:space-y-3 max-lg:fixed max-lg:bg-[linear-gradient(to_bottom,rgb(45,2,2),rgb(0,0,0))] max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:px-10 max-lg:py-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50 lg:hidden sm:hidden'>
             <li className='max-lg:border-b max-lg:py-3'><a href='javascript:void(0)' className='hover:text-[#007bff] text-white font-bold text-[15px] block'  >Home</a></li>
             <li className='max-lg:border-b max-lg:py-3'><a href='javascript:void(0)' className='hover:text-[#007bff] text-white font-bold text-[15px] block'>Song List</a></li>
             <li className='max-lg:border-b max-lg:py-3'><a href='javascript:void(0)' className='hover:text-[#007bff] text-white font-bold text-[15px] block'>Create Playlist</a></li>
