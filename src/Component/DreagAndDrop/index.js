@@ -120,7 +120,7 @@ const Card = ({ title, image, duration, path, singer }) => {
             </div>
             <div className="test" onClick={handleDropdownToggle}></div>
             {dropdownVisible && (
-                <DropdownMenu className='DropdownMenu' playlistDetail={{ title, image, duration, path, singer }} />
+                <DropdownMenu className='DropdownMenu' playlistDetail={{ title, image, duration, path, singer }} setDropdownVisible={setDropdownVisible}/>
             )}
         </div>
     );
