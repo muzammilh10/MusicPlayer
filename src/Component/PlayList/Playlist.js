@@ -120,10 +120,11 @@ const Playlist = ({ onClick }) => {
 
     const navigate = useNavigate();
 
-    const { user, isAuthenticated } = useSelector((state) => state.account)
-    const { playlists } = user
+    const { isAuthenticated } = useSelector((state) => state.account)
+    const { playlists } = useSelector((state) => state.playlist);
+    const data = playlists?.[0];
+    // const { playlists } = user
 
-    console.log({PluginArray:playlists})
 
     return (
 
@@ -137,11 +138,11 @@ const Playlist = ({ onClick }) => {
                     <h1 className="text-xl font-bold text-center mb-1 rounded-sm bg-gray-900">Your Playlist</h1>
                     <div className=" shadow-lg h-64 overflow-y-auto custom-scrollbar custom-scrollbar1">
                         <ul>
-                            {playlists?.map((playlist, index) => (
+                            {data?.map((playlist, index) => (
                                 <li
                                     onClick={onClick ? () => onClick(playlist) : () => { navigate(`/playlist/${playlist._id}`) }}
                                     key={index}
-                                    className="flex justify-between items-center p-2 mb-2 bg-red rounded-lg shadow hover:bg-gray-900"
+                                    className="flex justify-between items-center p-2 bg-red rounded-lg shadow hover:bg-gray-900"
                                 >
                                     <div className="truncate">
                                         <p className="text-sm font-semibold truncate">{playlist.name}</p>
@@ -150,7 +151,8 @@ const Playlist = ({ onClick }) => {
                             ))}
                         </ul>
                     </div>
-                </>}
+                </>
+            }
         </div>
 
 

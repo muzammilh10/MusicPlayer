@@ -21,9 +21,6 @@ const Signup = () => {
     }
     const { user, isAuthenticated } = useSelector((state) => state.account)
 
-    console.log({ user, isAuthenticated })
-
-    console.log({ user, isAuthenticated })
     const navigate = useNavigate()
     useEffect(() => {
         if (isAuthenticated) {
@@ -35,7 +32,6 @@ const Signup = () => {
         e.preventDefault()
         const { email, password, gender, username } = userDetails
         const data = JSON.stringify({ email, password, gender, username })
-        console.log(data)
         const res = await fetch("http://localhost:5001/api/user/register", {
             method: "POST",
             headers: {
@@ -44,14 +40,11 @@ const Signup = () => {
             body: data,
         })
 
-        console.log({ res })
         const d = await res.json()
-        console.log({ d })
         if (d.success) {
             setUserDetails({ email: "", password: "", gender: "", username: "" })
             toast.success(d.message);
             navigate('/')
-            localStorage.setItem("token", JSON.stringify(d.token))
         }
         else {
             toast.error(d.message);

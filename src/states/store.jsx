@@ -11,7 +11,7 @@ const initialState = {};
 const reducer = combineReducers({
     mainSong: songReducer,
     account: userReducer,
-    // playlist: playlistReducer,
+    playlist: playlistReducer,
 
 });
 

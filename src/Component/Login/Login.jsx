@@ -8,7 +8,7 @@ import Modal from '../Modal/Modal'
 
 const Login = () => {
     const dispatch = useDispatch()
-    const { user, isAuthenticated } = useSelector((state) => state.account)
+    const { isAuthenticated } = useSelector((state) => state.account)
     const [userDetails, setUserDetails] = useState({ password: "", username: "" })
 
     const [isModalOpen, setIsModalOpen] = useState(true)
@@ -28,30 +28,32 @@ const Login = () => {
     })
 
     const loginUser = async (e) => {
-        e.preventDefault()
-        const { username, password } = userDetails
-        const data = JSON.stringify({ password, username })
-        console.log(data)
-        const res = await fetch("http://localhost:5001/api/user/login", {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json"
-            },
-            body: data,
-        })
-        const d = await res.json()
-        console.log({ d })
+        e.preventDefault();
+        const { username, password } = userDetails;
+        const data = JSON.stringify({ password, username });
 
-        if (d.success) {
-            toast.success(d.message);
-            localStorage.setItem("token", JSON.stringify(d.token));
-            localStorage.setItem("user", JSON.stringify(d.user));
-            console.log({ d })
-            dispatch(userActor(d.user))
-            navigate('/')
-        }
-        else {
-            toast.error(d.message);
+        try {
+            const res = await fetch("http://localhost:5001/api/user/login", {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: data,
+            });
+            const d = await res.json();
+
+            if (d.success) {
+                toast.success(d.message);
+                localStorage.setItem("token", JSON.stringify(d.token));
+                localStorage.setItem("user", JSON.stringify(d.user));
+                dispatch(userActor(d.user));
+                navigate('/');
+            } else {
+                toast.error(d.message);
+            }
+        } catch (error) {
+            console.error('Error during login or fetching playlists:', error);
+            toast.error('An error occurred. Please try again.');
         }
     }
 

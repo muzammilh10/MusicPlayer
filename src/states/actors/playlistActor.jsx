@@ -1,14 +1,15 @@
+import { ADD_PLAYLIST, PAUSE_PLAYLIST_REQUEST, REMOVE_PLAYLIST } from "../constants/playlistConstant";
 
 export const addPlaylist = (playlist) => async (dispatch) => {
     dispatch({
-        type: 'ADD_PLAYLIST',
+        type: ADD_PLAYLIST,
         payload: playlist
     });
 };
 
 export const removePlaylist = (playlistId) => async (dispatch) => {
     dispatch({
-        type: 'REMOVE_PLAYLIST',
+        type: REMOVE_PLAYLIST,
         payload: playlistId
     });
 };

@@ -287,3 +287,11 @@ body,
   background-color: #555;
   /* Color on hover */
 }
+
+.playlist-list {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  top: 38%;
+}

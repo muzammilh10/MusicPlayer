@@ -24,7 +24,7 @@ const Popup = ({ isOpen, onClose, onSubmit, newPlaylistName, setNewPlaylistName 
                 <button onClick={onClose}>Cancel</button>
             </div>
         </div>,
-        document.querySelector('body') // Ensure this element exists in your HTML
+        document.querySelector('body')
     );
 };
 
@@ -54,13 +54,10 @@ const SideNaveBar = () => {
         navigate('/login');
     };
 
-    // Handle creating a new playlist
-    console.log({newPlaylistName})
-
     const handleCreatePlaylist = async () => {
         if (newPlaylistName.trim()) {
             try {
-                const response = await fetch(`http://localhost:5001/api/user/playlists`, {
+                const response = await fetch(`http://localhost:5001/api/playlist`, {
                     method: 'POST',
                     body: JSON.stringify({ name: newPlaylistName }), // Wrap newPlaylistName in an object
                     headers: {
@@ -69,13 +66,14 @@ const SideNaveBar = () => {
                     },
                 });
 
-                if (response.ok) { 
-                    const createdPlaylist = await response.json(); 
-                    setPlaylists([...playlists, createdPlaylist.name]);
-                    handleAddPlaylist(createdPlaylist); 
+                if (response.ok) {
+                    const createdPlaylist = await response.json();
+                    const { playlist } = createdPlaylist;
+                    setPlaylists(playlist)
+                    dispatch(addPlaylist(playlist));                    
                     setNewPlaylistName('');
-                    setIsPopupOpen(false); 
-                    // dispatch(userPlaylist(newPlaylistName))
+                    setIsPopupOpen(false);
+                    // dispatch(userPlaylist(createdPlaylist));
                 } else {
                     const errorData = await response.json();
                     console.error('Failed to create playlist:', errorData.message);
@@ -120,15 +118,9 @@ const SideNaveBar = () => {
 
             {/* Display the list of playlists */}
             <ul className='playlist-list'>
-                {playlists?.map((playlist, index) => (
-                    <li key={index} className="flex items-center space-x-2 cursor-pointer">
-                        <img src='./vector (1).png' className="w-5 h-5" />
-                        <span>{playlist}</span>
-                    </li>
-                ))}
-            </ul>
 
             <Playlist />
+            </ul>
 
             <ul className='bottom_left_content'>
                 {isAuthenticated ? (

@@ -1,3 +1,4 @@
+import { ADD_PLAYLIST, PAUSE_MASTER_PLAYLIST, PAUSE_PLAYLIST_REQUEST, PLAY_MASTER_PLAYLIST, PLAY_PLAYLIST_REQUEST, REMOVE_PLAYLIST } from "../constants/playlistConstant";
 // src/states/playlistReducer.js
 const initialState = {
     masterPlaylist: {},  // The playlist currently being played
@@ -8,7 +9,7 @@ const initialState = {
 export const playlistReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_PLAYLIST:
-            return { ...state, playlists: [...state.playlists, action.payload] };
+            return { ...state, playlists: [action.payload] };
 
         case REMOVE_PLAYLIST:
             return { ...state, playlists: state.playlists.filter(playlist => playlist.id !== action.payload) };

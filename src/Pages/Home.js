@@ -3,6 +3,8 @@ import SideNaveBar from "../Component/Sidenavbar/sideNavebar";
 import Header from "../Component/Header/Header";
 import DND from "../Component/DreagAndDrop";
 import MusicPlayer from '../Component/musicPlayer/index';
+import { useDispatch, useSelector } from "react-redux";
+import { addPlaylist } from "../states/actors/playlistActor";
 
 
 const dataItems = [
@@ -119,13 +121,26 @@ const dataItems = [
 
 
 const Home = ({ setIsPlaying, setCurrentIndex, currentIndex }) => {
-
+    const dispatch = useDispatch()
+    const { user } = useSelector((state) => state.account)
 
     const handleClick = (item) => {
         setCurrentIndex(item);
         setIsPlaying(true)
     }
 
+    const playList = async () => {
+        const token = JSON.parse(localStorage.getItem("token"))
+        if (token) {
+            const playlistRes = await fetch(`http://localhost:5001/api/playlist/userPlaylist/${user._id}`);
+            const playlists = await playlistRes.json();
+            dispatch(addPlaylist(playlists.data));
+        }
+    }
+
+    useEffect(() => {
+        playList()
+    }, [])
     return (
         <div class="container px-6 ">
             <div class="grid grid-cols-1 mt-8 gap-1 xl:mt-12 xl:gap-1 sm:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4">

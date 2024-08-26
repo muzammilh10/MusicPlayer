@@ -13,12 +13,10 @@ const DropdownMenu = ({ playlistDetail = {} }) => {
     setIsSubDropdownOpen(!isSubDropdownOpen);
   };
 
-  console.log({ playlistDetail })
 
 
   const handlePlaylistClick = async (playlistData) => {
     try {
-      console.log({ uniqueId: playlistData.uniqueId, playlistDetail });
 
       const response = await fetch(`http://localhost:5001/api/playlist/${playlistData.uniqueId}`, {
         method: 'PUT',

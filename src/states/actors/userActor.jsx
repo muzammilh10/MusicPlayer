@@ -7,7 +7,6 @@ import {
 
 export const userActor = (user) => async (dispatch) => {
 
-    console.log({ user })
     dispatch({
         type: USER_LOGGED_IN,
         payload: user
@@ -17,7 +16,6 @@ export const userActor = (user) => async (dispatch) => {
 
 export const userPlaylist  = (user) => async (dispatch) => {
 
-    console.log({ user })
     dispatch({
         type: UPDATE_USER_PLAYLISTS,
         payload: user
@@ -26,7 +24,6 @@ export const userPlaylist  = (user) => async (dispatch) => {
 
 export const userLogout = (user) => async (dispatch) => {
 
-    console.log({ user })
     dispatch({
         type: USER_LOGGED_OUT,
         payload: user

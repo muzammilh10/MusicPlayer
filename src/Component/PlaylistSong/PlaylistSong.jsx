@@ -17,7 +17,6 @@ const PlayListSong = ({ setCurrentIndex, setIsPlaying }) => {
                 const response = await fetch(`http://localhost:5001/api/playlist/${id}`);
                 const { data } = await response.json();
 
-                console.log({ doc: data.data[0].songs })
 
                 if (response.ok) {
                     setItems(data.data[0].songs);  // Assuming data.song contains the array of songs

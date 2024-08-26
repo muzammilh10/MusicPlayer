@@ -9,7 +9,6 @@ const initialState = {
     user: JSON.parse(localStorage.getItem("user")) || {},
     isAuthenticated: !!localStorage.getItem("token")
 };
-console.log({ initialState })
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_LOGGED_IN:
@@ -26,12 +25,11 @@ export const userReducer = (state = initialState, action) => {
 
         case UPDATE_USER_PLAYLISTS:
 
-            console.log({ UPDATE_USER_PLAYLISTS: action.payload })
             return {
                 ...state,
                 user: {
                     ...state.user,
-                    playlists: [ {name:action.payload}, ...state.user.playlists ],
+                    playlists: [ ...state.user.playlists ],
                 },
             };
 
