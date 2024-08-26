@@ -6,6 +6,8 @@ import MusicPlayer from '../Component/musicPlayer/index';
 
 
 import Routers from "./../Router/router";
+import { addPlaylist } from "../states/actors/playlistActor";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
@@ -15,6 +17,23 @@ import Routers from "./../Router/router";
 const Layout = ({ dataItems, currentIndex, setCurrentIndex }) => {
 
     const [isPlaying, setIsPlaying] = useState(false);
+
+    const dispatch = useDispatch()
+    const { user } = useSelector((state) => state.account)
+
+    const playList = async () => {
+        const token = JSON.parse(localStorage.getItem("token"))
+        if (user) {
+            const playlistRes = await fetch(`http://localhost:5001/api/playlist/userPlaylist/${user._id}`);
+            const playlists = await playlistRes.json();
+            console.log({playlists})
+            dispatch(addPlaylist(playlists.data));
+        }
+    }
+
+    useEffect(() => {
+        playList()
+    }, [])
 
     // const handleClick = (item) => {
     //     setCurrentIndex(item);

@@ -140,8 +140,14 @@ const Playlist = ({ onClick }) => {
                         <ul>
                             {data?.map((playlist, index) => (
                                 <li
-                                    onClick={onClick ? () => onClick(playlist) : () => { navigate(`/playlist/${playlist._id}`) }}
-                                    key={index}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (onClick) {
+                                        onClick(playlist);
+                                    } else {
+                                        navigate(`/playlist/${playlist._id}`);
+                                    }
+                                }}                                    key={index}
                                     className="flex justify-between items-center p-2 bg-red rounded-lg shadow hover:bg-gray-900"
                                 >
                                     <div className="truncate">

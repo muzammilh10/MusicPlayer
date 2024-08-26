@@ -1,10 +1,4 @@
-import React, { useState, useEffect } from "react";
-import SideNaveBar from "../Component/Sidenavbar/sideNavebar";
-import Header from "../Component/Header/Header";
-import DND from "../Component/DreagAndDrop";
-import MusicPlayer from '../Component/musicPlayer/index';
-import { useDispatch, useSelector } from "react-redux";
-import { addPlaylist } from "../states/actors/playlistActor";
+import React from "react";
 
 
 const dataItems = [
@@ -121,29 +115,15 @@ const dataItems = [
 
 
 const Home = ({ setIsPlaying, setCurrentIndex, currentIndex }) => {
-    const dispatch = useDispatch()
-    const { user } = useSelector((state) => state.account)
 
     const handleClick = (item) => {
         setCurrentIndex(item);
         setIsPlaying(true)
     }
 
-    const playList = async () => {
-        const token = JSON.parse(localStorage.getItem("token"))
-        if (token) {
-            const playlistRes = await fetch(`http://localhost:5001/api/playlist/userPlaylist/${user._id}`);
-            const playlists = await playlistRes.json();
-            dispatch(addPlaylist(playlists.data));
-        }
-    }
-
-    useEffect(() => {
-        playList()
-    }, [])
     return (
-        <div class="container px-6 ">
-            <div class="grid grid-cols-1 mt-8 gap-1 xl:mt-12 xl:gap-1 sm:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4">
+        <div className="container px-6 ">
+            <div className="grid grid-cols-1 mt-8 gap-1 xl:mt-12 xl:gap-1 sm:grid-cols-3 xl:grid-cols-4 lg:grid-cols-4">
                 {dataItems.map((item, index) => (
                     <div
                         key={index}
@@ -152,12 +132,12 @@ const Home = ({ setIsPlaying, setCurrentIndex, currentIndex }) => {
                         onClick={() => handleClick(item)}
                     >
                         <div
-                            class="w-full h-auto bg-gray-300 rounded-lg dark:bg-gray-600 transition-colors hover:bg-gray-400 dark:hover:bg-gray-500"
+                            className="w-full h-auto bg-gray-300 rounded-lg dark:bg-gray-600 transition-colors hover:bg-gray-400 dark:hover:bg-gray-500"
                         >
-                            <img src={item.image} class="w-full h-auto rounded-md" />
+                            <img src={item.image} className="w-full h-auto rounded-md" />
                         </div>
-                        <p class="w-auto mt-1 text-xs text-white">{item.title}</p>
-                        <p class="w-auto mt-1 text-xs text-white">{item.singer}
+                        <p className="w-auto mt-1 text-xs text-white">{item.title}</p>
+                        <p className="w-auto mt-1 text-xs text-white">{item.singer}
                         </p>
                     </div>
                 ))}

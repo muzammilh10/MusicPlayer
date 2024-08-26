@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './index.css';
 import DropdownMenu from '../DropDown/Dropdown';
 
@@ -36,7 +36,6 @@ const DND = ({ dataItems, currentIndex, setCurrentIndex, setIsPlaying }) => {
         setCurrentIndex(item);
         setIsPlaying(true)
     }
-    console.log({ items })
     return (
         <>
             <div className="dnd_wrapper">
@@ -68,16 +67,34 @@ const DND = ({ dataItems, currentIndex, setCurrentIndex, setIsPlaying }) => {
 // Card component
 const Card = ({ title, image, duration, path, singer }) => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
-
+    const dropdownRef = useRef(null);
 
     const handleDropdownToggle = (e) => {
         e.stopPropagation();
         setDropdownVisible(!dropdownVisible);
-
     };
 
+    const handleClickOutside = (e) => {
+        // Check if the clicked target is not inside the dropdown or button
+        if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+            setDropdownVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        if (dropdownVisible) {
+            document.addEventListener('click', handleClickOutside);
+        } else {
+            document.removeEventListener('click', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [dropdownVisible]);
+
     return (
-        <div className="card_item">
+        <div className="card_item" ref={dropdownRef}>
             <div className="card_icon">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -102,9 +119,12 @@ const Card = ({ title, image, duration, path, singer }) => {
                 <span>{title}</span>
             </div>
             <div className="test" onClick={handleDropdownToggle}></div>
-            {dropdownVisible && <DropdownMenu className='DropdownMenu' playlistDetail={{ title, image, duration, path, singer }} />}
+            {dropdownVisible && (
+                <DropdownMenu className='DropdownMenu' playlistDetail={{ title, image, duration, path, singer }} />
+            )}
         </div>
     );
 };
+
 
 export default DND;

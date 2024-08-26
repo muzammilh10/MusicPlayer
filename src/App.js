@@ -3,7 +3,6 @@ import './App.css';
 import DND from './Component/DreagAndDrop/index';
 import Header from './Component/Header/Header';
 import MusicPlayer from './Component/musicPlayer/index';
-import useFetch from './hooks/useFetch';
 import Layout from './Layout/layout';
 import { Provider } from 'react-redux'
 import store from './states/store'
