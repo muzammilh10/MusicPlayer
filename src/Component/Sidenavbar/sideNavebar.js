@@ -5,6 +5,7 @@ import { userLogout, userPlaylist } from '../../states/actors/userActor'
 import ReactDOM from 'react-dom';
 import { addPlaylist } from './../../states/actors/playlistActor';
 import Playlist from "../PlayList/Playlist";
+import { toast } from "react-toastify";
 
 
 const Popup = ({ isOpen, onClose, onSubmit, newPlaylistName, setNewPlaylistName }) => {
@@ -67,6 +68,9 @@ const SideNaveBar = () => {
                 });
 
                 if (response.ok) {
+                    toast.success("Playlist Created",{
+                        position:"top-center"
+                    })
                     const createdPlaylist = await response.json();
                     const { playlist } = createdPlaylist;
                     setPlaylists(playlist)
@@ -76,9 +80,15 @@ const SideNaveBar = () => {
                     // dispatch(userPlaylist(createdPlaylist));
                 } else {
                     const errorData = await response.json();
+                    toast("Default Notification !", {
+                        position: "top-center",
+                    });
                     console.error('Failed to create playlist:', errorData.message);
                 }
             } catch (error) {
+                toast("Default Notification !", {
+                    position: "top-center",
+                });
                 console.error('Error creating playlist:', error);
             }
         } else {
@@ -89,7 +99,7 @@ const SideNaveBar = () => {
 
     return (
         <>
-            <img className="h-auto max-w-full p-4 pt-5 logostyle" src='./Logo.png' alt="logo" />
+            <img className="h-auto max-w-full p-4 pt-5 logostyle cursor-pointer" src='./Logo.png' alt="logo"  onClick={() => navigate('/home')}/>
             <ul className='menuStyle'>
                 <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/home')}>
                     <img src='./vector.png' className="w-5 h-5" />

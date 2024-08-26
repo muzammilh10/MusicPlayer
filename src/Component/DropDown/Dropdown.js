@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Playlist from '../PlayList/Playlist';
 import { useSelector } from 'react-redux';
 
-const DropdownMenu = ({ playlistDetail = {} }) => {
+const DropdownMenu = ({ playlistDetail = {}, setDropdownVisible }) => {
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSubDropdownOpen, setIsSubDropdownOpen] = useState(false);
   const { isAuthenticated } = useSelector((state) => state.account)
@@ -28,6 +28,7 @@ const DropdownMenu = ({ playlistDetail = {} }) => {
 
       if (response.ok) {
         console.log('Song added to playlist:', playlistData.name);
+        setDropdownVisible(false)
       } else {
         console.error('Failed to add song to playlist', await response.json());
       }

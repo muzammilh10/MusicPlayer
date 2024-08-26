@@ -43,7 +43,9 @@ const Signup = () => {
         const d = await res.json()
         if (d.success) {
             setUserDetails({ email: "", password: "", gender: "", username: "" })
-            toast.success(d.message);
+            toast.success(d.message, {
+                position: "top-center"
+            });
             navigate('/')
         }
         else {

@@ -43,17 +43,24 @@ const Login = () => {
             const d = await res.json();
 
             if (d.success) {
-                toast.success(d.message);
+                toast.success(d.message, {
+                    position: "top-center"
+                });
                 localStorage.setItem("token", JSON.stringify(d.token));
                 localStorage.setItem("user", JSON.stringify(d.user));
                 dispatch(userActor(d.user));
                 navigate('/');
+
             } else {
-                toast.error(d.message);
+                toast.error(d.message, {
+                    position: "top-center"
+                });
             }
         } catch (error) {
             console.error('Error during login or fetching playlists:', error);
-            toast.error('An error occurred. Please try again.');
+            toast.error('An error occurred. Please try again.', {
+                position: "top-center"
+            });
         }
     }
 
@@ -66,7 +73,7 @@ const Login = () => {
             <Modal isOpen={isModalOpen} onClose={handleClose}>
                 <div className="bg-white">
                     <div className='bg-white text-black text-center mx-auto '>
-                        <h6 className='text-xl font-bold my-1'>Sign up for free to start listening</h6>
+                        <h6 className='text-xl font-bold my-1'>Sign in for free to start listening</h6>
                         <div className="border-b border-gray-500 "></div>
                         <form onSubmit={loginUser} className='text-center mx-auto '>
                             <div className='w-full text-left pt-2'>

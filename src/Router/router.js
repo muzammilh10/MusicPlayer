@@ -18,7 +18,7 @@ const Routers = ({ setIsPlaying, setCurrentIndex, currentIndex, dataItems }) => 
             <Route path='/playlist' element={<DND setIsPlaying={setIsPlaying} setCurrentIndex={setCurrentIndex} currentIndex={currentIndex} dataItems={dataItems} />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/playlist/:id' element={<PlayListSong setCurrentIndex={setCurrentIndex} setIsPlaying={setIsPlaying} />} />
+            <Route path='/:id' element={<PlayListSong setCurrentIndex={setCurrentIndex} setIsPlaying={setIsPlaying} />} />
 
             {/* <Route path="/about" element={<About />} /> */}
             {/* <Route path="/gallery" element={<MasonaryGallryImages />} /> */}

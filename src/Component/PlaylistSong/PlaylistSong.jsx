@@ -142,10 +142,6 @@ const Card = ({ title, image, duration, path, singer }) => {
             <div className="card_title">
                 <span>{title}</span>
             </div>
-            <div className="test" onClick={handleDropdownToggle}></div>
-            {dropdownVisible && (
-                <DropdownMenu className='DropdownMenu' playlistDetail={{ title, image, duration, path, singer }} />
-            )}
         </div>
     );
 };

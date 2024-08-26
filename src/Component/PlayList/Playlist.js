@@ -145,7 +145,7 @@ const Playlist = ({ onClick }) => {
                                     if (onClick) {
                                         onClick(playlist);
                                     } else {
-                                        navigate(`/playlist/${playlist._id}`);
+                                        navigate(`/${playlist._id}`);
                                     }
                                 }}                                    key={index}
                                     className="flex justify-between items-center p-2 bg-red rounded-lg shadow hover:bg-gray-900"
