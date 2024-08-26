@@ -23,13 +23,14 @@ const Layout = ({ dataItems, currentIndex, setCurrentIndex }) => {
 
     const playList = async () => {
         const token = JSON.parse(localStorage.getItem("token"))
-        if (user) {
+        if (token) {
             const playlistRes = await fetch(`http://localhost:5001/api/playlist/userPlaylist/${user._id}`);
             const playlists = await playlistRes.json();
             console.log({playlists})
             dispatch(addPlaylist(playlists.data));
         }
     }
+    console.log({user})
 
     useEffect(() => {
         playList()

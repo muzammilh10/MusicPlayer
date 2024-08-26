@@ -86,14 +86,11 @@ const Login = () => {
                             </div>
 
                             <div className='w-full text-left py-4'>
-                                <input type="submit" id='submit' name='submit' className='block w-full outline-none p-3 hover:scale-105 transition-all duration-200 bg-green-500 hover:bg-green-400 text-black hover:font-semibold text-center rounded-full' />
-                            </div>
-                            <div className='w-full text-cenetr py-4'>
-                                <Link to="/password/forgot" className='text-white font-semibold underline text-center'>Forgot your password?</Link>
+                                <input type="submit" id='submit' name='submit' className='block w-full outline-none p-3 hover:scale-105 transition-all duration-200   text-black hover:font-semibold text-center rounded-full' style={{ backgroundColor: 'rgb(66, 7, 7)' }} />
                             </div>
                         </form>
                         <div className="border-b border-gray-500 w-3/4 mx-auto my-2"></div>
-                        <p className='pt-2'><span className='text-black font-semibold'>Don't have account?</span> <Link to="/signup" className='text-black font-semibold underline text-center hover:text-green-500'>Sign Up for Dream Music</Link></p>
+                        <p className='pt-2'><span className='text-black font-semibold'>Don't have account?</span> <Link to="/signup" className='text-black font-semibold underline text-center hover:text-red-500'>Sign Up for Dream Music</Link></p>
                     </div>
                 </div>
             </Modal>

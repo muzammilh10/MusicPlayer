@@ -46,6 +46,7 @@ const Signup = () => {
             toast.success(d.message, {
                 position: "top-center"
             });
+
             navigate('/')
         }
         else {
@@ -96,12 +97,12 @@ const Signup = () => {
 
                             {/* Button */}
                             <div className='w-full text-left pt-2 flex justify-center'>
-                                <input type="submit" id='submit' name='submit' className='block w-3/4 outline-none p-2 hover:scale-105 transition-all duration-200 text-black hover:font-semibold text-center rounded-full' style={{ backgroundColor: 'rgb(66, 7, 7)' }} value="Sign up" />
+                                <input type="submit" id='submit' name='submit' className='block w-3/4 outline-none p-2 hover:scale-105 transition-all duration-200 hover:font-semibold text-center text-white rounded-full' style={{ backgroundColor: 'rgb(66, 7, 7)' }} value="Sign up" />
 
                             </div>
 
                         </form>
-                        <p className='pt-2'><span className='text-black font-semibold'>Already have an account?</span> <Link to="/login" className='text-black font-semibold underline text-center hover:text-green-500'>Log in for Dream Music</Link></p>
+                        <p className='pt-2'><span className='text-black font-semibold'>Already have an account?</span> <Link to="/login" className='text-black font-semibold underline text-center hover:text-red-500'>Log in for Dream Music</Link></p>
                     </div>
                 </div>
             </Modal>
