@@ -8,6 +8,7 @@ import MusicPlayer from '../Component/musicPlayer/index';
 import Routers from "./../Router/router";
 import { addPlaylist } from "../states/actors/playlistActor";
 import { useDispatch, useSelector } from "react-redux";
+import { BASE_URL } from "../config";
 
 
 
@@ -24,13 +25,12 @@ const Layout = ({ dataItems, currentIndex, setCurrentIndex }) => {
     const playList = async () => {
         const token = JSON.parse(localStorage.getItem("token"))
         if (token) {
-            const playlistRes = await fetch(`http://localhost:5001/api/playlist/userPlaylist/${user._id}`);
+            const playlistRes = await fetch(`${BASE_URL}/api/playlist/userPlaylist/${user._id}`);
             const playlists = await playlistRes.json();
             console.log({playlists})
             dispatch(addPlaylist(playlists.data));
         }
     }
-    console.log({user})
 
     useEffect(() => {
         playList()

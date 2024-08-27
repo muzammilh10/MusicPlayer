@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { addPlaylist } from './../../states/actors/playlistActor';
 import Playlist from "../PlayList/Playlist";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../config";
 
 
 const Popup = ({ isOpen, onClose, onSubmit, newPlaylistName, setNewPlaylistName }) => {
@@ -55,7 +56,7 @@ const SideNaveBar = () => {
     const handleCreatePlaylist = async () => {
         if (newPlaylistName.trim()) {
             try {
-                const response = await fetch(`http://localhost:5001/api/playlist`, {
+                const response = await fetch(`${BASE_URL}/api/playlist`, {
                     method: 'POST',
                     body: JSON.stringify({ name: newPlaylistName }), // Wrap newPlaylistName in an object
                     headers: {
@@ -101,7 +102,7 @@ const SideNaveBar = () => {
                 </li>
                 <li className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/playlist')}>
                     <img src='./vector (1).png' className="w-5 h-5" />
-                    <span>Playlist</span>
+                    <span>Song list</span>
                 </li>
                 {isAuthenticated &&
                     <li className="flex items-center space-x-2 cursor-pointer" onClick={() => setIsPopupOpen(true)}>

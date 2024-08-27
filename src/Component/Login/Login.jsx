@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { userActor } from '../../states/actors/userActor'
 import Modal from '../Modal/Modal'
+import { BASE_URL } from '../../config'
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -33,7 +34,7 @@ const Login = () => {
         const data = JSON.stringify({ password, username });
 
         try {
-            const res = await fetch("http://localhost:5001/api/user/login", {
+            const res = await fetch(`${BASE_URL}/api/user/login`, {
                 method: "POST",
                 headers: {
                     'Content-Type': "application/json"

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Playlist from '../PlayList/Playlist';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { BASE_URL } from '../../config';
 
 const DropdownMenu = ({ playlistDetail = {}, setDropdownVisible }) => {
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -19,7 +20,7 @@ const DropdownMenu = ({ playlistDetail = {}, setDropdownVisible }) => {
   const handlePlaylistClick = async (playlistData) => {
     try {
 
-      const response = await fetch(`http://localhost:5001/api/playlist/${playlistData.uniqueId}`, {
+      const response = await fetch(`${BASE_URL}/api/playlist/${playlistData.uniqueId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

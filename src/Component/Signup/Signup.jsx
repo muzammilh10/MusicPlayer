@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Modal from '../Modal/Modal'
+import { BASE_URL } from '../../config'
 const Signup = () => {
 
 
@@ -32,7 +33,7 @@ const Signup = () => {
         e.preventDefault()
         const { email, password, gender, username } = userDetails
         const data = JSON.stringify({ email, password, gender, username })
-        const res = await fetch("http://localhost:5001/api/user/register", {
+        const res = await fetch(`${BASE_URL}/api/user/register`, {
             method: "POST",
             headers: {
                 'Content-Type': "application/json"
@@ -47,7 +48,7 @@ const Signup = () => {
                 position: "top-center"
             });
 
-            navigate('/')
+            navigate('/login')
         }
         else {
             console.log(d)

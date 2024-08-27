@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './index.css';
 import DropdownMenu from '../DropDown/Dropdown';
+import { BASE_URL } from '../../config';
 
 
 const PlayListSong = ({ setCurrentIndex, setIsPlaying }) => {
@@ -14,7 +15,7 @@ const PlayListSong = ({ setCurrentIndex, setIsPlaying }) => {
         // Fetch playlist data when the component mounts
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:5001/api/playlist/${id}`);
+                const response = await fetch(`${BASE_URL}/api/playlist/${id}`);
                 const { data } = await response.json();
 
 
