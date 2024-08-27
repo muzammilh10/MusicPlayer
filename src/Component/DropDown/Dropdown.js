@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Playlist from '../PlayList/Playlist';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const DropdownMenu = ({ playlistDetail = {}, setDropdownVisible }) => {
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -27,7 +28,9 @@ const DropdownMenu = ({ playlistDetail = {}, setDropdownVisible }) => {
       });
 
       if (response.ok) {
-        console.log('Song added to playlist:', playlistData.name);
+        toast.success("Song added to playlist",{
+          position:'top-center'
+        })
         setDropdownVisible(false)
       } else {
         console.error('Failed to add song to playlist', await response.json());
