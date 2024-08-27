@@ -41,8 +41,8 @@ const dataItems = [
   {
       id: 4,
       path: './nightChanges.mp3',
-      title: "White Petaled Flowers",
-      singer: 'A.R Rahaman ',
+      title: "Night Changes",
+      singer: 'One Direction ',
       image:
           "https://images.pexels.com/photos/54388/white-flowers-delicate-flowers-three-flowers-54388.jpeg?auto=compress&cs=tinysrgb&w=640&h=380&dpr=1",
       duration: '00:00'

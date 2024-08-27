@@ -50,7 +50,10 @@ const Signup = () => {
             navigate('/')
         }
         else {
-            toast.error(d.message);
+            console.log(d)
+            toast.error(d.error, {
+                position: "top-center"
+            });
         }
     }
 

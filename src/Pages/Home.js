@@ -21,12 +21,12 @@ const dataItems = [
         duration: '00:00'
     },
     {
-        id: 3,
-        path: './audio3.mp3',
-        title: "Purple - YellowFlower",
-        singer: 'A.R Rahaman ',
+        id: 4,
+        path: './nightChanges.mp3',
+        title: "Night Changes",
+        singer: 'One Direction ',
         image:
-            "https://images.pexels.com/photos/670741/pexels-photo-670741.jpeg?auto=compress&cs=tinysrgb&w=640&h=380&dpr=1",
+            "https://images.pexels.com/photos/54388/white-flowers-delicate-flowers-three-flowers-54388.jpeg?auto=compress&cs=tinysrgb&w=640&h=380&dpr=1",
         duration: '00:00'
     },
     {
